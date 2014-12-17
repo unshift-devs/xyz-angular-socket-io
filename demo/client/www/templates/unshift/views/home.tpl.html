@@ -1,0 +1,64 @@
+<div class="header">
+  <div class="header-logo">LOGO</div>
+  <div class="header-user-box">
+    <div class="inline-block">logged as: {{homeCtrl.dataModel.user.username}}</div>
+    <button ng-click="homeCtrl.logout()"
+      class="inline-block">logout</button>
+    <span class="connection-status" ng-class="{
+        red: homeCtrl.socket.error || !homeCtrl.socket.connected,
+        yellow: homeCtrl.socket.connecting,
+        green: homeCtrl.socket.connected
+      }">&nbsp;
+      <span>
+  </div>
+</div>
+
+<div class="rooms-static">
+  <input type="text" ng-model="homeCtrl.newRoom" xyz-enter-pressed="homeCtrl.addRoom(homeCtrl.newRoom)">
+  <button ng-click="homeCtrl.addRoom(homeCtrl.newRoom)">Add Rooms+</button>
+</div>
+
+<div class="rooms">
+  <ul>
+    <li ng-repeat="room in homeCtrl.dataModel.rooms"
+      ng-click="homeCtrl.changeRoom(room)"
+      ng-class="{
+        'active-room': room === homeCtrl.activeRoom
+      }"><a href="">{{room.name}}</a>
+    </li>
+  </ul>
+</div>
+
+<div class="rooms" ng-show="homeCtrl.activeRoom">
+  <ul>
+    <li><button ng-click="homeCtrl.leaveRoom()">Leave Room</button> </li>
+    <li>connected users: </li>
+    <li ng-repeat="user in homeCtrl.session.users"
+      ng-hide="user.username === homeCtrl.dataModel.user.username"><small>{{user.username}}</small></li>
+  </ul>
+</div>
+
+<div ng-show="homeCtrl.activeRoom">
+  <div ng-repeat="msg in homeCtrl.session.messages track by $index">
+    <small class="chat-message-row">
+      <span class="chat-timestamp"
+        ng-class="{'chat-archived-message': msg.archived}"
+        >[{{msg.timestamp | date:'HH:mm:ss'}}]</span>
+      <span class="chat-author"
+        ng-class="{'chat-archived-message': msg.archived}"
+        >[{{msg.author.username}}]</span>
+    </small> &#8594;
+    <div class="chat-message"
+      ng-class="{
+        'chat-leave-action': msg.type === 'leave-action',
+        'chat-enter-action': msg.type === 'enter-action',
+        'chat-archived-message': msg.archived
+      }">{{msg.message}}</div><br/>
+  </div>
+</div>
+
+<div class="input-row" ng-show="homeCtrl.activeRoom">
+  <input type="text" class="input-chat" ng-model="homeCtrl.nextMessage" xyz-enter-pressed="homeCtrl.sendMessage()">
+
+  <button class="chat-button" ng-click="homeCtrl.sendMessage()">&gt;</button>
+</div>

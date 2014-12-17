@@ -1,0 +1,48 @@
+{
+  "js": [
+    "!**/bower_components/**",
+    "!**/demo/**",
+    "!www/lib/**/*.js",
+    "!www/**/*_test.js",
+    "!www/**/*.bak*",
+    "www/**/*.js"
+  ],
+  "vendors": [
+    "!**/bower_components/**",
+    "!www/**/*_test.js",
+    "!www/**/*.bak*",
+    "www/lib/**/*.js",
+    "www/styles/vendor/*.css"
+  ],
+  "css": ["!**/bower_components/**",
+    "!www/**/*.bak*",
+    "www/styles/*.css",
+    "!www/styles/vendor/**/*"
+  ],
+  "bowerOrder": [
+    "**/*lodash*.js",
+    "**/*socket.io.js",
+    "**/*angular.js",
+    "**/*"
+  ],
+  "partials": [
+    "**/**",
+    "!**/demo/**/*",
+    "!index.html",
+    "!index.tpl.html",
+    "!404.html",
+    "!**/bower_components/**/*.html"
+  ],
+  "images": [
+    "www/images/**/*"
+  ],
+  "bowerImages": [
+    "**/bower_components/jquery-ui/**/*.{jpg,jpeg,png,gif,svg}"
+  ],
+  "ignorePath": "www/",
+  "indexSrc": "www/index.html",
+  "dest": "www",
+  "envFolder": "www/app",
+  "template": "www/index.tpl.html",
+  "addRootSlash": false
+}

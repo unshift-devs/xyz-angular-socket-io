@@ -1,0 +1,85 @@
+/* connection status indicator */
+
+.connection-status {
+  border-radius: 12px;
+  border: thin black;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+}
+.red {
+  background-color: red;
+}
+.green {
+  background-color: green;
+}
+.yellow {
+  background-color: yellow;
+}
+/* header */
+
+.header {
+  display: block;
+  width: 100%;
+  height: 30px;
+  background-color: #eeeeee;
+  padding-top: 15px;
+}
+.header-logo {
+  float: left;
+  display: inline-block;
+}
+.header-user-box {
+  float: right;
+  display: inline-block;
+}
+.inline-block {
+  display: inline-block;
+}
+/* rooms management controls */
+
+.rooms rooms-static a {
+  display: inline;
+  padding-right: 20px;
+}
+.rooms li {
+  display: inline;
+  list-style-type: none;
+  padding-right: 20px;
+}
+.active-room a {
+  background-color: #eee;
+}
+/* input row */
+
+.input-row {
+  padding: 0;
+  margin: 0;
+}
+.input-row .input-chat {
+  width: 93%;
+}
+.input-row .chat-button {
+  width: 5%;
+}
+/* chat */
+
+.chat-message-row {} .chat-message-row .chat-timestamp {
+  color: #666;
+}
+.chat-message-row .chat-author {
+  color: #990000;
+}
+
+.chat-message {
+  display: inline;
+}
+.chat-leave-action {
+  color: #990000;
+}
+.chat-enter-action {
+  color: #009900;
+}
+.chat-archived-message {
+  color: #999999 !important;
+}

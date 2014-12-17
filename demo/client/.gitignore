@@ -1,0 +1,12 @@
+.DS_Store
+Thumbs.db
+node_modules
+bower_components
+dist/
+www/index.html
+.tern-port
+tmp-upload/
+local-config.json
+production-config.json
+www/app/local-config.js
+www/app/production-config.js

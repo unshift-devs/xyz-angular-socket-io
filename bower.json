@@ -1,0 +1,25 @@
+{
+  "name": "xyz-angular-socket-io",
+  "version": "0.0.1",
+  "authors": [
+    "Matteo Ronchi <matteo.ronchi@gmail.com>"
+  ],
+  "description": "An angularJS service wrapping socket.io",
+  "main": "dist/xyz.socket.min.js",
+  "keywords": [
+    "angular",
+    "socket.io"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/unshift-devs/xyz-angular-socket-io",
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "demo",
+    ".editorconfig",
+    ".jsbeautifyrc",
+    ".jscsrc",
+    ".jshintrc",
+    ".tern-project"
+  ]
+}
