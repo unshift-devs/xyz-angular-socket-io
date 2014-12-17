@@ -6,3 +6,4 @@ www/index.html
 .tern-port
 local-config.json
 www/app/local-config.js
+npm-debug.log

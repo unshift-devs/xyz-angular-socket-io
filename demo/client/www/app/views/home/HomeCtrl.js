@@ -36,7 +36,7 @@
           }
 
           // force user registration status
-          dataModel.setUserAsRegistered();
+          dataModel.setUserAsRegistered(true);
         });
     }
 
@@ -111,6 +111,8 @@
     // ------------------------
 
     function disconnectedHandler() {
+      // force user registration status
+      dataModel.setUserAsRegistered(false);
       goToLogin();
     }
     self.socket.addEventListener('disconnect', disconnectedHandler);
