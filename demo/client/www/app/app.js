@@ -10,7 +10,9 @@
     'xyz.socket.chat.services',
     'xyz.socket.chat.views',
     'xyz.socket.chat.config',
-    'xyz.socket.chat.services.rest'
+    'xyz.socket.chat.services.rest',
+
+    'ngMaterial', 'ngAnimate', 'ngSanitize'
   ]).
 
   config(function ($stateProvider, $urlRouterProvider, $locationProvider,

@@ -1,4 +1,122 @@
-<div class="header">
+
+<md-toolbar class="md-accent">
+  <h1 class="md-toolbar-tools">
+
+
+    <span flex>
+      <span class="connection-status" ng-class="{
+        red: homeCtrl.socket.error || !homeCtrl.socket.connected,
+        yellow: homeCtrl.socket.connecting,
+        green: homeCtrl.socket.connected
+      }" >&nbsp;
+      </span>
+      {{homeCtrl.dataModel.user.username || 'Angular Socket IO Chat'}}
+
+    </span>
+    <md-button class="md-fab md-accent" aria-label="refresh"
+        ng-click="homeCtrl.logout()">
+      <md-tooltip>
+        Logout
+      </md-tooltip>
+      <!-- <md-icon icon="img/icons/ic_refresh_24px.svg">
+      </md-icon> -->
+      <i class="fa fa-sign-out"></i>
+    </md-button>
+
+  </h1>
+</md-toolbar>
+
+
+
+
+<md-card>
+
+  <md-content>
+    <section layout="row" layout-sm="column" layout-align="center center">
+
+      <md-text-float label="Room Name" ng-model="homeCtrl.newRoom"></md-text-float>
+
+      <md-button class="md-fab md-accent" aria-label="addroom"
+        style="display: inline-block; float:left"
+         ng-click="homeCtrl.addRoom(homeCtrl.newRoom)">
+          <md-tooltip>
+            Add Room
+          </md-tooltip>
+          <i class="fa fa-plus"></i>
+        </md-button>
+
+    </section>
+
+</md-card>
+
+<!-- {{homeCtrl.activeRoom}} -->
+  <md-tabs md-selected="selectedIndex">
+
+    <md-tab ng-repeat="tab in homeCtrl.dataModel.rooms" md-on-select="homeCtrl.changeRoom(tab)" md-on-deselect="announceDeselected(tab)" ng-disabled="false" label="{{tab.name}}">
+    <div class="demo-tab tab{{$index%4}}" layout="column" layout-fill layout-align="space-around center">
+      <div ng-bind="tab.content"></div>
+        <!-- <md-button class="md-warn" ng-click="homeCtrl.removeTab( tab )">
+          Remove Tab
+        </md-button> -->
+      </div>
+    </md-tab>
+
+  </md-tabs>
+
+
+<div layout="row" layout-margin layout-padding>
+
+  <div flex="20">
+    <md-card>
+     <md-button class="md-raised" ng-click="homeCtrl.leaveRoom()">Leave Room</md-button>
+      <li>Total users: {{homeCtrl.session.users.length}} </li>
+      <!-- <li ng-repeat="user in homeCtrl.session.users"
+        ng-hide="user.username === homeCtrl.dataModel.user.username"><small>{{user.username}}</small></li> -->
+      <md-list>
+        <md-item ng-repeat="user in homeCtrl.session.users">
+          <md-item-content>
+            <div class="md-tile-left">
+                <!-- <img ng-src="{{item.face}}" class="face" alt="{{item.who}}"> -->
+                {{user.username}}
+            </div>
+          </md-item-content>
+        </md-item>
+      </md-list>
+    </md-card>
+
+    <!-- <li ng-repeat="user in homeCtrl.session.users"><small>{{user.username}}</small></li> -->
+
+  </div>
+
+
+  <div flex>
+    <md-card>
+    <div ng-show="homeCtrl.activeRoom">
+      <div ng-repeat="msg in homeCtrl.session.messages track by $index">
+        <small class="chat-message-row">
+          <span class="chat-timestamp"
+            ng-class="{'chat-archived-message': msg.archived}"
+            >[{{msg.timestamp | date:'HH:mm:ss'}}]</span>
+          <span class="chat-author"
+            ng-class="{'chat-archived-message': msg.archived}"
+            >[{{msg.author.username}}]</span>
+        </small> &#8594;
+        <div class="chat-message"
+          ng-class="{
+            'chat-leave-action': msg.type === 'leave-action',
+            'chat-enter-action': msg.type === 'enter-action',
+            'chat-archived-message': msg.archived
+          }">{{msg.message}}</div><br/>
+      </div>
+    </div>
+    </md-card>
+  </div>
+
+</div>
+
+
+
+<!-- <div class="header">
   <div class="header-logo">LOGO</div>
   <div class="header-user-box">
     <div class="inline-block">logged as: {{homeCtrl.dataModel.user.username}}</div>
@@ -11,14 +129,14 @@
       }">&nbsp;
       <span>
   </div>
-</div>
+</div> -->
 
-<div class="rooms-static">
+<!-- <div class="rooms-static">
   <input type="text" ng-model="homeCtrl.newRoom" xyz-enter-pressed="homeCtrl.addRoom(homeCtrl.newRoom)">
   <button ng-click="homeCtrl.addRoom(homeCtrl.newRoom)">Add Rooms+</button>
-</div>
+</div> -->
 
-<div class="rooms">
+<!-- <div class="rooms">
   <ul>
     <li ng-repeat="room in homeCtrl.dataModel.rooms"
       ng-click="homeCtrl.changeRoom(room)"
@@ -27,17 +145,21 @@
       }"><a href="">{{room.name}}</a>
     </li>
   </ul>
-</div>
+</div> -->
 
-<div class="rooms" ng-show="homeCtrl.activeRoom">
+<!-- <div class="rooms" ng-show="homeCtrl.activeRoom">
   <ul>
     <li><button ng-click="homeCtrl.leaveRoom()">Leave Room</button> </li>
-    <li>connected users: </li>
     <li ng-repeat="user in homeCtrl.session.users"
       ng-hide="user.username === homeCtrl.dataModel.user.username"><small>{{user.username}}</small></li>
-  </ul>
-</div>
 
+  </ul>
+</div> -->
+<br>
+<br>
+<br>
+<br>
+<!--
 <div ng-show="homeCtrl.activeRoom">
   <div ng-repeat="msg in homeCtrl.session.messages track by $index">
     <small class="chat-message-row">
@@ -56,7 +178,7 @@
       }">{{msg.message}}</div><br/>
   </div>
 </div>
-
+ -->
 <div class="input-row" ng-show="homeCtrl.activeRoom">
   <input type="text" class="input-chat" ng-model="homeCtrl.nextMessage" xyz-enter-pressed="homeCtrl.sendMessage()">
 
