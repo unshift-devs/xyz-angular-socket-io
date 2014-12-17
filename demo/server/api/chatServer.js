@@ -55,7 +55,7 @@
 
         // leave old room
         if (currentRoom) {
-          socket.leave(currentRoom);
+          leaveRoomHandler(currentRoom);
         }
 
         // join the room
