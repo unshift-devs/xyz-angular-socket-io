@@ -4,12 +4,8 @@ var gulp = require('gulp');
 
 gulp.task('connect:src', function () {
   var connect = require('connect');
-  var modRewrite = require('connect-modrewrite');
 
   var app = connect()
-    .use(modRewrite([
-      '^[^\\.]*$ /index.html [L]'
-    ]))
     .use(connect.static('www'));
 
   gulp.server = require('http').createServer(app)
@@ -21,12 +17,8 @@ gulp.task('connect:src', function () {
 
 gulp.task('connect:dist', function () {
   var connect = require('connect');
-  var modRewrite = require('connect-modrewrite');
 
   var app = connect()
-    .use(modRewrite([
-      '^[^\\.]*$ /index.html [L]'
-    ]))
     .use(connect.static('dist'));
 
   gulp.server = require('http').createServer(app)

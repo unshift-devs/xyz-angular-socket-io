@@ -10,7 +10,6 @@
   "devDependencies": {
     "connect": "^2.14.4",
     "connect-livereload": "^0.4.0",
-    "connect-modrewrite": "^0.7.9",
     "gulp": "^3.8.10",
     "gulp-angular-filesort": "^1.0.4",
     "gulp-bower-files": "^0.2.1",

@@ -97,9 +97,8 @@
     } catch (err) {
       gutil.log('There has been an error parsing your JSON. A default values will be created');
       config = {
-        basePath: '/',
         socketUrl: 'http://192.168.33.10:3000',
-        restBaseUrl: 'http://192.168.33.10:3000',
+        restBaseUrl: 'http://192.168.33.10:3000'
       };
       configString = JSON.stringify(config);
 
@@ -112,14 +111,9 @@
       }
     }
 
-    gulp.src(configFile)
+    return gulp.src(configFile)
       .pipe(gulpNgConfig('xyz.socket.chat.env'))
       .pipe(gulp.dest(paths.envFolder));
-
-    return gulp.src(paths.template)
-      .pipe(replace(/(%basepath%)/, config.basePath))
-      .pipe(rename('index.html'))
-      .pipe(gulp.dest(paths.dest));
   });
 
   gulp.task('inject', ['inject:bower']);

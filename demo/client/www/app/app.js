@@ -81,8 +81,6 @@
       return;
     });
 
-    $locationProvider.html5Mode(true);
-
   });
 
 })();
