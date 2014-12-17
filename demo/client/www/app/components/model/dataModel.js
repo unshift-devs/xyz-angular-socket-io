@@ -35,8 +35,8 @@
       }
     });
 
-    self.setUserAsRegistered = function setUserAsRegistered() {
-      userRegistered = true;
+    self.setUserAsRegistered = function setUserAsRegistered(value) {
+      userRegistered = value;
     };
 
   });
