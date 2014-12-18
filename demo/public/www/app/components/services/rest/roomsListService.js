@@ -9,11 +9,13 @@
   .service('roomsListService', function roomsListService($http, _, restBaseUrl, dataModel) {
     var self = this;
 
-    var endPoint = restBaseUrl + '/rooms';
+    var endPoint = restBaseUrl + '/api/rooms';
 
     function resultHandler(data) {
       dataModel.rooms = {};
-      dataModel.rooms['_empty'] = {name: ''}
+      dataModel.rooms._empty = {
+        name: ''
+      };
       _.extend(dataModel.rooms, data.data);
     }
 

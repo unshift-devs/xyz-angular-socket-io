@@ -20,7 +20,7 @@
   // ------------
 
   // all environments
-  app.set('port', process.env.PORT || 5400);
+  app.set('port', process.env.PORT || 8080);
   app.use(cors());
   app.use(logger('dev'));
   app.use(methodOverride());
@@ -34,18 +34,18 @@
     extended: true
   }));
   app.use(multer());
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(path.join(__dirname, 'public/www')));
 
   // ------------
   // ------------ REST ROUTES
   // ------------
 
-  app.get('/rooms', routes.rooms);
+  app.get('/api/rooms', routes.rooms);
 
-  app.get('/population/:roomId', routes.roomPopulation);
+  app.get('/api/population/:roomId', routes.roomPopulation);
 
   // serve index.html for all other routes
-  app.all('/*', routes.catchAll);
+  app.all('/api/*', routes.catchAll);
 
   // ------------
   // ------------ start express server
