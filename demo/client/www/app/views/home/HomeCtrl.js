@@ -71,20 +71,21 @@
     }
 
     self.changeRoom = function changeRoom(room) {
-      if (self.activeRoom === room) {
+      if (self.activeRoom && self.activeRoom.uid === room.uid) {
         return;
       }
 
-      self.activeRoom = room;
-
-      self.socket.emit(socketEvents.toServer.enterRoom, room.uid, roomChanged);
+      // required beacuse angular material tab trigger changeRoom() after the $destroy event
+      if (self.socket) {
+        self.activeRoom = room;
+        self.socket.emit(socketEvents.toServer.enterRoom, room.uid, roomChanged);
+      }
     };
 
     function roomLeft(error, onlineUsers) {
       self.session = undefined;
       self.activeRoom = undefined;
     }
-
     self.leaveRoom = function leaveRoom() {
       self.socket.emit(socketEvents.toServer.leaveRoom, self.activeRoom.uid, roomLeft);
     };

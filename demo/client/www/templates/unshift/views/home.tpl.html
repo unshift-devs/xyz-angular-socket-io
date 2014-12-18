@@ -76,6 +76,12 @@
 
   <md-tabs class="md-accent md-hue-3">
 
+    <md-tab
+            md-active="!homeCtrl.activeRoom"
+            ng-disabled="homeCtrl.activeRoom"
+            label="&#8962;">
+    </md-tab>
+
     <md-tab ng-repeat="tab in homeCtrl.dataModel.rooms"
             md-on-select="homeCtrl.changeRoom(tab)"
             md-active="homeCtrl.activeRoom.uid === tab.uid"
@@ -86,7 +92,22 @@
   </md-tabs>
 
 
-<div layout="row" layout-margin layout-padding>
+<div layout="row" layout-margin layout-padding ng-hide="homeCtrl.activeRoom">
+
+   <div flex>
+
+    <!-- NOT IN ROOMS PLACEHOLDER -->
+    <md-card>
+
+      <section layout="row" layout-sm="column" layout-align="center center">
+        Log into a room to start a conversation
+      </section>
+    </md-card>
+  </div>
+
+</div>
+
+<div layout="row" layout-margin layout-padding ng-show="homeCtrl.activeRoom">
 
   <!-- USER LIST -->
   <div flex="30">
@@ -134,7 +155,7 @@
 
     <!-- CHAT MESSAGE -->
     <md-card>
-      <div ng-show="homeCtrl.activeRoom" class="chat">
+      <div class="chat">
         <div ng-repeat="msg in homeCtrl.session.messages track by $index">
           <small class="chat-message-row">
             <span class="bold font-l"
@@ -153,8 +174,7 @@
         </div>
       </div>
 
-      <section layout="row" layout-sm="column" layout-align="center center"
-                ng-show="homeCtrl.activeRoom">
+      <section layout="row" layout-sm="column" layout-align="center center">
 
         <md-text-float label="Write your message" md-theme="cyan"
            ng-model="homeCtrl.nextMessage" xyz-enter-pressed="homeCtrl.sendMessage()"></md-text-float>
