@@ -76,17 +76,10 @@
 
   <md-tabs class="md-accent md-hue-3">
 
-    <md-tab
-            md-active="!homeCtrl.activeRoom"
-            ng-disabled="homeCtrl.activeRoom"
-            label="&#8962;">
-    </md-tab>
-
     <md-tab ng-repeat="tab in homeCtrl.dataModel.rooms"
             md-on-select="homeCtrl.changeRoom(tab)"
-            md-active="homeCtrl.activeRoom.uid === tab.uid"
-            ng-disabled="false"
-            label="{{tab.name}}">
+            md-active="(tab.name !== '') ? homeCtrl.activeRoom.uid === tab.uid : !homeCtrl.activeRoom"
+            label="{{tab.name || '&#8962;'}}">
     </md-tab>
 
   </md-tabs>

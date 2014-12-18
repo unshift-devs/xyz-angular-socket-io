@@ -13,6 +13,7 @@
 
     function resultHandler(data) {
       dataModel.rooms = {};
+      dataModel.rooms['_empty'] = {name: ''}
       _.extend(dataModel.rooms, data.data);
     }
 

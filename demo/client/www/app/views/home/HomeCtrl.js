@@ -62,8 +62,8 @@
       self.changeRoom(room);
     }
     self.addRoom = function addRoom(roomName) {
-      self.socket.emit(socketEvents.toServer.addRoom, roomName, roomAdded);
-      self.toggleAddRoomControls(false);
+        self.socket.emit(socketEvents.toServer.addRoom, roomName, roomAdded);
+        self.toggleAddRoomControls(false);
     };
 
     function roomChanged(error, roomInfo) {
@@ -72,6 +72,13 @@
 
     self.changeRoom = function changeRoom(room) {
       if (self.activeRoom && self.activeRoom.uid === room.uid) {
+        return;
+      }
+
+      if (room.name === '') {
+        if (self.activeRoom) {
+          self.leaveRoom();
+        }
         return;
       }
 
