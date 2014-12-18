@@ -63,7 +63,9 @@
   width: 5%;
 }
 /* chat */
-
+.chat {
+  height: 300px; overflow-y: scroll
+}
 .chat-message-row {} .chat-message-row .chat-timestamp {
   color: #666;
 }
@@ -83,3 +85,61 @@
 .chat-archived-message {
   color: #999999 !important;
 }
+
+
+
+/*******************************/
+/* TYPEGRAPHY */
+/*******************************/
+
+html, body {
+  font-family: 'Roboto', Arial, serif;
+  font-weight: 400;
+  color: black;
+  font-size: 15px;
+  background-color: white;
+}
+
+.light {
+font-family: 'Roboto', Arial, serif;
+font-weight: 300;
+}
+.normal {
+font-family: 'Roboto', Arial, serif;
+font-weight: 400;
+}
+
+.bold {
+font-family: 'Roboto', Arial, serif;
+font-weight: 600;
+}
+
+
+.font-xxl {
+  font-size:  34px;
+}
+
+.font-xl {
+  font-size:  20px;
+}
+
+
+.font-l {
+  font-size:  18px;
+}
+
+.font-mdd {
+  font-size:  17px;
+}
+
+.font-md {
+  font-size:  13px;
+}
+
+.font-sm {
+  font-size:  11px;
+}
+
+
+
+

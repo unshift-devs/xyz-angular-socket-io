@@ -1,3 +1,55 @@
+
+<md-toolbar class="md-accent">
+  <h1 class="md-toolbar-tools">
+
+    <span flex>Angular Socket IO </span>
+
+    <!-- LOGOUT -->
+    <span ng-hide="showCreateRoomPanel">
+      <md-button class="md-fab md-accent" aria-label="refresh"
+        ng-click="homeCtrl.logout()">
+        <md-tooltip>
+          Created by unshift.xyz
+        </md-tooltip>
+        <!-- <md-icon icon="img/unshift_icon.png" width="30"></md-icon> -->
+        <a href="http://www.unshift.xyz" target="_blank"><img src="img/unshift_icon.png" style="width:100%"></a>
+
+      </md-button>
+    </span>
+
+
+  </h1>
+</md-toolbar>
+
+
+<div layout="column" layout-align="center center"
+     ng-show="loginCtrl.socket.connected">
+
+     <h1 class="light font-xxl">Login</h1>
+
+    <md-text-float label="Write your username" md-theme="cyan"
+       ng-model="loginCtrl.username"
+       xyz-enter-pressed="loginCtrl.register()"></md-text-float>
+
+    <md-button class="md-fab md-accent" aria-label="signin"
+               ng-disabled="!loginCtrl.socket.connected"
+               ng-click="loginCtrl.register()">
+      <md-tooltip>Sign In</md-tooltip>
+      <i class="fa fa-sign-in"></i>
+    </md-button>
+
+
+
+
+</div>
+
+<!-- NO CONNECTION AVAILABLE -->
+<h3 layout="row" layout-align="center center"
+     ng-hide="loginCtrl.socket.connected"  class="font-xxl light">
+  <i class="fa fa-exclamation-triangle"></i> No Connection to the server available
+</h3>
+
+<!--
 <h3 ng-cloak ng-hide="loginCtrl.socket.connected">No Connection to the server available</h3 ng-cloak>
 <div>
   <input
@@ -9,3 +61,4 @@
     >
     <button ng-disabled="!loginCtrl.socket.connected" ng-click="loginCtrl.register()">login</button>
 </div>
+ -->

@@ -20,7 +20,7 @@
   // ------------
 
   // all environments
-  app.set('port', process.env.PORT || 3000);
+  app.set('port', process.env.PORT || 5400);
   app.use(cors());
   app.use(logger('dev'));
   app.use(methodOverride());

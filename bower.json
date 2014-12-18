@@ -21,5 +21,6 @@
     ".jscsrc",
     ".jshintrc",
     ".tern-project"
-  ]
+  ],
+  "dependencies": {}
 }
