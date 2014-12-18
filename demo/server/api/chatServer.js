@@ -44,8 +44,6 @@
       socket.on(model.socketEvents.listened.registerUser, registerUserHandler);
 
       function enterRoomHandler(roomUid, callback) {
-        console.log(currentUser.username + ' enter room: ' + roomUid);
-
         if (!model.rooms.hasOwnProperty(roomUid)) {
           if (callback) {
             callback('The room "' + roomUid + '" doesn\'t exists:');
@@ -57,6 +55,8 @@
         if (currentRoom) {
           leaveRoomHandler(currentRoom);
         }
+
+        console.log(currentUser.username + ' enter room: ' + model.rooms[roomUid].name);
 
         // join the room
         socket.join(roomUid);
@@ -121,14 +121,25 @@
         }
 
         if (currentRoom) {
-          // if no more user are on the room, remove it
-          if (model.roomsPopulation[currentRoom].length === 0) {
-            if (!_.contains(model.staticRooms, currentRoom)) {
-              delete model.roomsPopulation[currentRoom];
-              delete model.roomsHistory[currentRoom];
-              delete model.rooms[currentRoom];
-              // send to all connected clients
-              ioRoom.emit(model.socketEvents.emitted.roomRemoved, currentRoom);
+
+          // don't try to remove the static rooms
+          if (!_.contains(model.staticRooms, currentRoom)) {
+
+            // if no more user are on the room, remove it
+            if (model.roomsPopulation[currentRoom].length === 0) {
+
+              var roomToLeave = currentRoom;
+              setTimeout(function removeEmptyRooms() {
+                console.log('testing to remove room ' + model.rooms[roomToLeave].name + ', numeber of users: ' + model.roomsPopulation[roomToLeave].length);
+                if (model.roomsPopulation[roomToLeave].length === 0) {
+                  delete model.roomsPopulation[roomToLeave];
+                  delete model.roomsHistory[roomToLeave];
+                  delete model.rooms[roomToLeave];
+                  // send to all connected clients
+                  ioRoom.emit(model.socketEvents.emitted.roomRemoved, roomToLeave);
+                }
+              }, 15000);
+
             }
           }
         }
