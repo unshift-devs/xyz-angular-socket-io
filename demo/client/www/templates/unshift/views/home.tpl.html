@@ -14,11 +14,14 @@
     <!-- ADD ROOM NAME TEXT FIELD -->
     <span>
     <md-text-float label="Room Name" ng-model="homeCtrl.newRoom"
-        ng-show="showCreateRoomPanel" md-theme="white" class="md-fab " ></md-text-float>
+        ng-show="homeCtrl.showCreateRoomPanel"
+        md-theme="white" class="md-fab"
+        xyz-enter-pressed="homeCtrl.addRoom(homeCtrl.newRoom)"
+        ></md-text-float>
     </span>
 
     <!-- ADD ROOM BUTTON CONFIRM -->
-    <span ng-show="showCreateRoomPanel">
+    <span ng-show="homeCtrl.showCreateRoomPanel">
       <md-button class="md-fab md-primary " aria-label="addroom"
                  style="display: inline-block; float:left"
                  ng-click="homeCtrl.addRoom(homeCtrl.newRoom)"
@@ -31,10 +34,10 @@
     </span>
 
     <!-- ADD ROOM BUTTON CANCEL -->
-    <span ng-show="showCreateRoomPanel">
+    <span ng-show="homeCtrl.showCreateRoomPanel">
       <md-button class="md-fab md-warn md-raised" aria-label="addroom"
         style="display: inline-block; float:left"
-       ng-click="showCreateRoomPanel = false">
+        ng-click="homeCtrl.toggleAddRoomControls(false)">
         <md-tooltip>
           Cancel
         </md-tooltip>
@@ -43,10 +46,10 @@
     </span>
 
     <!-- ADD ROOM SHOW BUTTON -->
-    <span ng-hide="showCreateRoomPanel">
+    <span ng-hide="homeCtrl.showCreateRoomPanel">
       <md-button class="md-fab  md-accent  md-hue-1" aria-label="addroom"
         style="display: inline-block; float:left"
-        ng-click="showCreateRoomPanel = true; homeCtrl.newRoom = null"
+        ng-click="homeCtrl.toggleAddRoomControls(true)"
         >
         <md-tooltip>
           Add Room
@@ -56,7 +59,7 @@
     </span>
 
     <!-- LOGOUT -->
-    <span ng-hide="showCreateRoomPanel">
+    <span ng-hide="homeCtrl.showCreateRoomPanel">
       <md-button class="md-fab md-accent" aria-label="refresh"
         ng-click="homeCtrl.logout()">
         <md-tooltip>
@@ -71,13 +74,11 @@
 </md-toolbar>
 
 
-<!-- {{homeCtrl.activeRoom}} -->
-
-  <md-tabs md-selected="selectedIndex" class="md-accent md-hue-3">
+  <md-tabs class="md-accent md-hue-3">
 
     <md-tab ng-repeat="tab in homeCtrl.dataModel.rooms"
             md-on-select="homeCtrl.changeRoom(tab)"
-            md-on-deselect="announceDeselected(tab)"
+            md-active="homeCtrl.activeRoom.uid === tab.uid"
             ng-disabled="false"
             label="{{tab.name}}">
     </md-tab>
@@ -178,6 +179,7 @@
 
   <!-- SERVER STATUS -->
   <md-button class="md-fab md-fab-bottom-right"
+    aria-label="Server Status"
     ng-class="{
       'md-warn' : homeCtrl.socket.error || !homeCtrl.socket.connected,
       'md-accent' : homeCtrl.socket.connecting,

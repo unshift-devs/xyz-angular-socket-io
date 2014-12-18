@@ -45,8 +45,15 @@
 
     self.nextMessage = '';
 
+    self.showCreateRoomPanel = false;
+
     // load rooms list
     roomsListService.execute();
+
+    self.toggleAddRoomControls = function toggleAddRoomControls(status) {
+      self.showCreateRoomPanel = status;
+      self.newRoom = null;
+    };
 
     function roomAdded(error, room) {
       dataModel.rooms[room.uid] = room;
@@ -56,6 +63,7 @@
     }
     self.addRoom = function addRoom(roomName) {
       self.socket.emit(socketEvents.toServer.addRoom, roomName, roomAdded);
+      self.toggleAddRoomControls(false);
     };
 
     function roomChanged(error, roomInfo) {
@@ -63,6 +71,10 @@
     }
 
     self.changeRoom = function changeRoom(room) {
+      if (self.activeRoom === room) {
+        return;
+      }
+
       self.activeRoom = room;
 
       self.socket.emit(socketEvents.toServer.enterRoom, room.uid, roomChanged);
