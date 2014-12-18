@@ -78,7 +78,6 @@
   });
 
   gulp.task('inject:init', function () {
-    var replace = require('gulp-replace');
     var fs = require('fs');
     var rename = require('gulp-rename');
     var gulpNgConfig = require('gulp-ng-config');
@@ -111,9 +110,13 @@
       }
     }
 
-    return gulp.src(configFile)
+    gulp.src(configFile)
       .pipe(gulpNgConfig('xyz.socket.chat.env'))
       .pipe(gulp.dest(paths.envFolder));
+
+    return gulp.src(paths.template)
+      .pipe(rename('index.html'))
+      .pipe(gulp.dest(paths.dest));
   });
 
   gulp.task('inject', ['inject:bower']);
